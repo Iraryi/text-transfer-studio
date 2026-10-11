@@ -207,7 +207,8 @@ class Editor:
             self.root.clipboard_clear();self.root.clipboard_append(payload)
             self.status.set('MCP 配置已复制；请在 AI 客户端合并配置并启用。')
         ttk.Button(dialog,text='复制 MCP 配置',command=copy_config).pack(pady=10)
-        def close():self.modals.close(dialog)
+        def close():
+            self.modals.dismiss(dialog);dialog.destroy()
         dialog.protocol('WM_DELETE_WINDOW',close);dialog.bind('<Escape>',lambda e:close())
         self.modals.open(dialog)
 

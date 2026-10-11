@@ -1,4 +1,5 @@
 import unittest
+from unittest.mock import patch
 from types import SimpleNamespace
 import model as m
 import layout
@@ -104,6 +105,17 @@ class InteractionTests(unittest.TestCase):
         e=self.editor;old=e.layer().y
         e.center('y');self.assertEqual(e.layer().y,.5)
         e.undo();self.assertEqual(e.layer().y,old)
+
+    def test_mcp_config_dialog_closes_and_releases_modal(self):
+        e=self.editor;errors=[]
+        self.root.report_callback_exception=lambda *args:errors.append(args)
+        with patch('app.filedialog.askdirectory',return_value=str(self.directory)):
+            e.mcp_settings();self.root.update()
+        dialog=e.modals.stack[-1]
+        self.assertEqual(dialog.title(),'连接外部 AI / 通用 MCP')
+        self.root.tk.call(dialog.protocol('WM_DELETE_WINDOW'));self.root.update()
+        self.assertFalse(dialog.winfo_exists());self.assertFalse(e.modals.stack)
+        self.assertFalse(errors)
 
 
 if __name__=='__main__':unittest.main()
