@@ -1,0 +1,23 @@
+# Publish only the reusable tool. No local images, projects, credentials or builds.
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.env*
+deps/
+build*/
+dist*/
+spec*/
+qa/
+*.textshift
+*.png
+*.jpg
+*.jpeg
+*.onnx
+*.zip
+*.exe
+*.log
+qa_window.py
+recover_window.py
+verify_release.py
+build_windows.py

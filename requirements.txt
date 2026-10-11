@@ -1,0 +1,8 @@
+Pillow==12.3.0
+rapidocr==3.10.0
+onnxruntime==1.29.0
+opencv-python-headless==4.10.0.84
+numpy==2.4.6
+fonttools==4.61.1
+requests==2.34.2
+jsonschema>=4.23,<5
